@@ -1,0 +1,72 @@
+//************************************************************************
+//***  AUTOR.: Renato F Santos
+//***  VERSÃO: 1.0 - DATA: 11.02.2022
+//************************************************************************
+
+$spacer: 1rem !default;
+$spacers: () !default;
+$spacers: map-merge((0: 0,
+    1: ($spacer * .25), //4px
+    2: ($spacer * .5), //8px
+    3: $spacer, //16px
+    4: ($spacer * 1.5), //24px
+    5: ($spacer * 3), //48px
+    6: ($spacer * 4), //64px
+    7: ($spacer * 5), //80px
+    8: ($spacer * 6.25), //100px
+    9: ($spacer * 7.5), //120px
+    10: ($spacer * 9.375) //150px
+  ),
+  $spacers);
+
+$primary-color: #b71c1c !default;
+$secondary-color: #EF6024 !default;
+$tertiary-color: #F0941F !default;
+$quaternary-color: #90A19D !default;
+$extra-color: #F23030 !default;
+$link-breadcrumb: #EF6024 !default;
+$footer-color: #000000 !default;
+$button-color: #1D594E !default;
+$primary-states-color: darken($primary-color, 10%) !default;
+$background-content: #FAFAFA !default;
+$background-menu: #ffffff;
+$background-menu-hover: #b71c1c;
+
+$font-color-menu: #000000;
+$font-color-menu-hover: #ffffff;
+$font-footer-color: #ffffff !default;
+$font-color: #000000;
+$font-size-base: 18px !default;
+$font-breadcrumb: 12px;
+$font-weight-light: 300 !default;
+$font-weight-bold: bold !default;
+
+$font-h1: 18em;
+$font-size-h1: 2.5em !default;
+$font-size-h2: 2.0em !default;
+$font-size-h3: 1.8em !default;
+$font-size-h4: 1.3em !default;
+$font-size-h5: 1.0em !default;
+$font-size-h6: 0.8em !default;
+$font-size-h7: 0.5em !default;
+$font-paragraph: 15px !default;
+$font-size-navbar: 14px !default;
+
+$grid-columns: 12;
+$grid-gutter-width: 30px;
+
+$grid-breakpoints: ( // Extra small screen / phone
+  xs: 0,
+  // Small screen / phone
+  sm: 576px,
+  // Medium screen / tablet
+  md: 768px,
+  // Large screen / desktop
+  lg: 992px,
+  // Extra large screen / wide desktop
+  xl: 1200px);
+
+$container-max-widths: (sm: 540px,
+  md: 720px,
+  lg: 960px,
+  xl: 1140px);

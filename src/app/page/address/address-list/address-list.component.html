@@ -1,0 +1,122 @@
+<!-- ******** BREADCRUMB ********** -->
+<div>
+  <app-bread-crumb [items]="[{text: 'Cadastro de Usuários', link: '/users'}, {text: pageTitle}]"></app-bread-crumb>
+</div>
+
+<!-- ******** USER ********** -->
+<div class="avatar-titulo">
+  <div class="preview_small" [ngStyle]="{ 'background-image': 'url(' + avatar + ')'}"></div>
+  <div class="barra-titulo">
+    <h1 class="mat-display-1">{{pageTitle}}: {{user.userNmName}}</h1>
+    <span id="uid">{{user.uid}}</span>
+  </div>
+  <div class="space-title"></div>
+  <div class="new-address">
+    <button mat-raised-button color="primary" (click)="getAddress('new')">Novo Endereço</button>
+  </div>
+</div>
+
+<!-- *** ADDRESS LIST *** -->
+<h3 class="header-list">Meus endereços</h3>
+<mat-list *ngIf="listAddress" #address>
+  <mat-list-item *ngFor="let element of listAddress" (click)="getAddress(element.address.uid)">
+    <mat-icon matListIcon>location_on</mat-icon>
+    <h3 matLine><strong>{{element.address?.addrNmAddress}}</strong></h3>
+    <p matLine>
+      <span>{{element.address?.addrDsAddress}}, {{element.address?.addrDsNumber}} {{element.address?.addrDsComplement}} {{element.address.addrNmDistrict}} {{element.address.addrNmCity}}/{{element.address.addrSgState}} {{element.address.addrCdZipcode}}</span>
+    </p>
+  </mat-list-item>
+</mat-list>
+<div *ngIf="!listAddress">
+  <h2>** Sem endereços cadastrados **</h2>
+</div>
+
+<!-- *** EDITION FORM *** -->
+
+<form #form="ngForm" [formGroup]="formAddress" (ngSubmit)="onFormSubmit()" class="container-form full-width">
+  <!-- ******** ADDRESS TYPE ********** -->
+  <div class="fieldType item-flex">
+    <mat-form-field class="field-full-width" appearance="outline">
+      <mat-label>Tipo Endereço</mat-label>
+      <mat-select [(value)]="selectTypeAddress" formControlName="addrCdType">
+        <mat-option *ngFor="let typeAddress of keys(typesAddress)" [value]="typeAddress">
+          {{typesAddress[typeAddress]}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <!-- ******** REFERENCE NAME ********** -->
+  <div class="fieldReference item-flex">
+    <mat-form-field class="field-full-width" appearance="outline">
+      <mat-label>Nome de Referência</mat-label>
+      <input matInput placeholder="defina um nome de referência" formControlName="addrNmAddress" required>
+      <mat-error><app-error-message [form-control]="formAddress.get('addrNmAddress')"></app-error-message></mat-error>
+    </mat-form-field>
+  </div>
+  <!-- ******** ADDRESS ********** -->
+  <div class="fieldAddress item-flex">
+    <mat-form-field class="field-full-width" appearance="outline">
+      <mat-label>Endereço</mat-label>
+      <input matInput placeholder="preencha o endereço" formControlName="addrDsAddress" required>
+      <mat-error><app-error-message [form-control]="formAddress.get('addrDsAddress')"></app-error-message></mat-error>
+    </mat-form-field>
+  </div>
+  <!-- ******** NUMBER ********** -->
+  <div class="fieldNumber item-flex">
+    <mat-form-field class="field-full-width" appearance="outline">
+      <mat-label>Número</mat-label>
+      <input matInput placeholder="preencha o número" formControlName="addrDsNumber">
+    </mat-form-field>
+  </div>
+  <!-- ******** COMPLEMENT ********** -->
+  <div class="fieldComplement item-flex">
+    <mat-form-field class="field-full-width" appearance="outline">
+      <mat-label>Complemento</mat-label>
+      <input matInput placeholder="preencha o complemento" formControlName="addrDsComplement">
+    </mat-form-field>
+  </div>
+  <!-- ******** DISTRICT ********** -->
+  <div class="fieldDistrict item-flex">
+    <mat-form-field class="field-full-width" appearance="outline">
+      <mat-label>Bairro</mat-label>
+      <input matInput placeholder="preencha o bairro" formControlName="addrNmDistrict">
+    </mat-form-field>
+  </div>
+  <!-- ******** CITY ********** -->
+  <div class="fieldCity item-flex">
+    <mat-form-field class="field-full-width" appearance="outline">
+      <mat-label>Cidade</mat-label>
+      <input matInput placeholder="preencha o nome da cidade" formControlName="addrNmCity" required>
+      <mat-error><app-error-message [form-control]="formAddress.get('addrNmCity')"></app-error-message></mat-error>
+    </mat-form-field>
+  </div>
+  <!-- ******** STATE ********** -->
+  <div class="fieldState item-flex">
+    <mat-form-field class="field-full-width" appearance="outline">
+      <mat-label>UF</mat-label>
+      <mat-select formControlName="addrSgState">
+        <mat-option *ngFor="let state of keys(states)" [value]="state">
+          {{states[state]}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <!-- ******** ZIPCODE ********** -->
+  <div class="fieldZipcode item-flex">
+    <mat-form-field class="field-full-width" appearance="outline">
+      <mat-label>CEP</mat-label>
+      <input matInput mask="00000-000" placeholder="00000-000" formControlName="addrCdZipcode" required>
+    </mat-form-field>
+  </div>
+  <!-- ******** PRINCIPAL ********** -->
+  <div class="fieldDefault item-flex">
+    <mat-checkbox formControlName="usadInDefault">
+      Endereço Atual
+    </mat-checkbox>
+  </div>
+  <div class="fieldToolbar">
+    <button mat-raised-button type="submit" color="primary" [disabled]="formAddress.invalid">Salvar</button>
+    <button mat-raised-button type="button" (click)="delete(addressSel)" color="accent" [disabled]="formAddress.invalid">Excluir</button>
+    <button id="btn-cancelar" mat-raised-button type="button" routerLink="/users">Cancelar</button>
+  </div>
+</form>

@@ -1,0 +1,47 @@
+<div>
+  <app-bread-crumb [items]="[{text: pageTitle}]"></app-bread-crumb>
+</div>
+
+<div class="barra-titulo">
+  <h1 class="mat-display-1">{{pageTitle}}</h1>
+</div>
+
+<div class="toolbar_search">
+  <mat-form-field appearance="outline">
+    <mat-label>Pesquisar</mat-label>
+    <input #fieldSearch matInput placeholder="Pesquisar...">
+  </mat-form-field>
+  <button mat-raised-button color="primary" routerLink="new" >Inserir</button>
+</div>
+
+<div>
+  <table mat-table  class="mat-elevation-z8 table" [dataSource]="dataResource" matSort (matSortChange)="sortData($event)">
+    <!-- Segment Column -->
+    <ng-container matColumnDef="Segmento">
+      <th mat-header-cell *matHeaderCellDef width="85%">SEGMENTO</th>
+      <td mat-cell *matCellDef="let element"> {{element.segmNmSegment}} </td>
+    </ng-container>
+
+    <!-- Action Column -->
+    <ng-container matColumnDef="uid">
+      <th mat-header-cell *matHeaderCellDef width="15%"></th>
+      <td mat-cell *matCellDef="let element" class="actions">
+        <button [disabled]="userLogged.userCdType=='V'" id="btn-edit" mat-icon-button routerLink="/segments/{{element.uid}}/edit">
+           <mat-icon>edit</mat-icon>
+        </button>
+        <button [disabled]="userLogged.userCdType=='V' || userLogged.userCdType=='E'" id="btn-delete" mat-icon-button (click)="delete(element)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <mat-paginator [length]="length"
+                [pageSize]="pageSize"
+                [pageSizeOptions]="pageSizeOptions"
+                (page)="pageEvent = $event"
+                aria-label="Select page">
+  </mat-paginator>
+</div>
+

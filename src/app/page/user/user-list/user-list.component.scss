@@ -1,0 +1,68 @@
+@import 'src/assets/scss/theme';
+
+.table {
+  width: 100%;
+}
+
+th {
+  background-color: #B0BEC5;
+  font-size: medium;
+}
+
+#btn-edit {
+  background-color: $secondary-color;
+  margin-right: 5px;
+  color: white;
+}
+
+#btn-delete {
+  background-color: $tertiary-color;
+  margin-right: 5px;
+}
+
+#btn-address {
+  background-color: $quaternary-color;
+}
+
+.toolbar_search {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-content: center;
+
+  & mat-form-field {
+    flex: 1 auto;
+    margin-right: 10px;
+    margin-bottom: -15px;
+  }
+
+  & button {
+    margin-top: 3px;
+    margin-bottom: 10px;
+  }
+}
+
+.mat-display-1 {
+  margin: 0 0 16px;
+}
+
+.mat-column-Sigla {
+  flex: 1 0 auto;
+}
+
+.mat-column-Nome {
+  flex: 1 0 auto;
+}
+
+.mat-column-Sobrenome {
+  flex: 1 0 auto;
+}
+
+.mat-column-Tipo {
+  flex: 1 0 auto;
+}
+
+.mat-column-uid {
+  flex: 1 0 auto;
+}
+

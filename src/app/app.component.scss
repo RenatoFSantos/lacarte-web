@@ -1,0 +1,135 @@
+@import '../styles.scss';
+
+.toolbar-spacer {
+  flex: 1 1 auto;
+}
+
+.footer {
+  display: flex;
+  color: white;
+  flex-direction: row;
+  justify-content: flex-end;
+  padding-right: 15px;
+  align-items: stretch;
+}
+
+.footer-text {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  span {
+    font-family: 'Montserrat';
+    font-size: 0.8rem;
+  }
+  mat-icon {
+    width: 20px;
+    padding-right: 3px;
+    font-size: 1.0rem;
+  }
+}
+
+mat-sidenav {
+  background-color: #ffffff;
+  width: 250px;
+}
+
+mat-sidenav mat-nav-list {
+  padding: 5px 0px 5px 5px;
+  min-width: 200px;
+  flex: 0 1 auto;
+  & .mat-subheader {
+    padding-top: 25px;
+    padding-bottom: 5px;
+    color: black;
+    font-size: larger;
+  }
+}
+
+mat-list-item:hover {
+  background-color: #b71c1c;
+  color: white;
+}
+
+mat-sidenav-content {
+  padding: 15px;
+}
+
+.avatar {
+  width: 35px;
+  height: 35px;
+  border: 2px solid white;
+  margin-right: 10px;
+  background-position: center center;
+  background-size: cover;
+  border-radius: 50%;
+}
+
+.login {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+
+  button {
+    margin-right: 5px;
+  }
+
+  span {
+    font-size: 1.2rem;
+    margin-right: 10px;
+    color: white;
+  }
+}
+
+mat-card {
+  display: grid;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 30px;
+  padding: 60px;
+  min-height: 300px;
+  max-height: 600px;
+  width: 500px;
+  justify-content: center;
+}
+
+mat-card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  button {
+    margin: 5px;
+    flex: 1 0 auto;
+  }
+
+  button:first-child {
+    background-color: #cecece;
+    padding: 10px 0px;
+  }
+}
+
+.logomarca {
+  height: 60px;
+  cursor: pointer;
+}
+
+.icomenu {
+  background-color: transparent;
+  color: white;
+}
+
+.form-login {
+  width: 100%;
+}
+
+.field-full-width {
+  width: 100%;
+}
+
+h5 {
+  margin: 10px;
+}
+
+

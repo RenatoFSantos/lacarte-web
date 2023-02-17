@@ -1,0 +1,72 @@
+<!-- ******** BREADCRUMB ********** -->
+<div>
+  <app-bread-crumb [items]="[{text: 'Cadastro de Empresas', link: '/companies'}, {text: 'Cadastro de Promoções', link: '/companies/' + company.uid + '/promotion'}, {text: pageTitle}]"></app-bread-crumb>
+</div>
+
+<div class="avatar-titulo barra-titulo">
+  <h1 class="mat-display-1">{{pageTitle}}</h1>
+</div>
+
+<!-- *** EDITION FORM *** -->
+<form #form="ngForm" *ngIf="formResource" [formGroup]="formResource" class="container-form full-width">
+
+  <!-- ******** IMAGE ********** -->
+  <div class="fieldImage preview" [style.background-image]="'url(&quot;' + image + '&quot;)'">
+  </div>
+  <!-- ******** START DATE ********** -->
+  <div class="fieldStart item-flex">
+    <mat-form-field class="field-full-width" appearance="outline">
+      <mat-label>Início</mat-label>
+      <input matInput [matDatepicker]="dtStart" formControlName="promDtStart" required>
+      <mat-datepicker-toggle matSuffix [for]="dtStart"></mat-datepicker-toggle>
+      <mat-datepicker #dtStart></mat-datepicker>
+      <mat-error><app-error-message [form-control]="formResource.get('promDtStart')"></app-error-message></mat-error>
+    </mat-form-field>
+  </div>
+  <!-- ******** FINISH DATE ********** -->
+  <div class="fieldFinish item-flex">
+    <mat-form-field class="field-full-width" appearance="outline">
+      <mat-label>Término</mat-label>
+      <input matInput [matDatepicker]="dtFinish" formControlName="promDtFinish">
+      <mat-datepicker-toggle matSuffix [for]="dtFinish"></mat-datepicker-toggle>
+      <mat-datepicker #dtFinish></mat-datepicker>
+      <mat-error><app-error-message [form-control]="formResource.get('promDtFinish')"></app-error-message></mat-error>
+    </mat-form-field>
+  </div>
+  <!-- ******** PROMOTION ********** -->
+  <div class="fieldPromotion item-flex">
+    <mat-form-field appearance="outline">
+      <mat-label>Promoção</mat-label>
+      <input matInput placeholder="digite o nome da sua promoção" formControlName="promNmPromotion" required>
+      <mat-error><app-error-message [form-control]="formResource.get('promNmPromotion')"></app-error-message></mat-error>
+    </mat-form-field>
+  </div>
+  <!-- ******** STATUS ********** -->
+  <div class="fieldStatus item-flex">
+    <mat-form-field class="field-full-width" appearance="outline">
+      <mat-label>Status</mat-label>
+      <mat-select formControlName="promCdStatus">
+        <mat-option *ngFor="let status of listStatus" [value]="status.value">
+          {{status.viewValue}}
+        </mat-option>
+      </mat-select>
+      <mat-error><app-error-message [form-control]="formResource.get('promCdStatus')"></app-error-message></mat-error>
+    </mat-form-field>
+  </div>
+  <!-- ******** DESCRIPTION ********** -->
+  <div class="fieldDescription item-flex">
+    <mat-form-field class="field-full-width" appearance="outline">
+      <mat-label>Descrição</mat-label>
+      <input matInput formControlName="promDsPromotion">
+    </mat-form-field>
+  </div>
+  <!-- ******** SELECT IMAGE ********** -->
+  <div class="fieldSelectFile item-flex">
+    <app-input-file #appInput [image]="promotion.promCdQrcode || 'qrcode_default.jpg'" (select)="selectedFile($event)"></app-input-file>
+  </div>
+  <div class="fieldToolbar">
+    <button mat-raised-button type="submit" color="primary" [disabled]="formResource.invalid" (click)="onFormSubmit()">Salvar</button>
+    <button mat-raised-button routerLink="/companies/{{company.uid}}/promotion">Cancelar</button>
+  </div>
+</form>
+

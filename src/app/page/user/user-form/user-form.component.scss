@@ -1,0 +1,153 @@
+@import 'src/assets/scss/theme';
+
+.fieldCashback {
+  grid-area: cashback;
+  color: $primary-color;
+}
+.fieldScore {
+  grid-area: score;
+  color: $primary-color;
+}
+.fieldRating {
+  grid-area: rating;
+  color: $primary-color;
+}
+.fieldAvatar {
+  grid-area: avatar;
+  justify-self: center;
+  align-self: flex-start;
+}
+.fieldInitials {
+  grid-area: sigla;
+}
+.fieldType {
+  grid-area: perfil;
+}
+.fieldEmail {
+  grid-area: email;
+}
+.fieldName {
+  grid-area: nome;
+}
+.fieldBirthdate {
+  grid-area: nascimento;
+}
+.fieldPhone {
+  grid-area: telefone;
+}
+.fieldSmartphone {
+  grid-area: celular;
+}
+.fieldWhatsapp {
+  grid-area: whatsapp;
+}
+.fieldLastname {
+  grid-area: sobrenome;
+}
+.fieldPassword {
+  grid-area: senha;
+}
+.fieldConfirm-password {
+  grid-area: confirma-senha;
+}
+.fieldAvatar-img {
+  grid-area: avatar-img;
+  justify-self: center;
+  margin-bottom: 0px;
+}
+.fieldToolbar {
+  grid-area: toolbar;
+  // width: 100%;
+  text-align: end;
+  border: 1px solid #f2f2f2;
+  padding: 10px;
+  box-shadow: 5px 4px 10px rgba(220, 213, 213, 0.7);
+  border-radius: 5px;
+  margin-top: 10px;
+
+  button:nth-child(1) {
+    margin-right: 5px;
+  }
+}
+
+.container-user {
+  display: grid;
+  grid-template-areas:
+  'avatar . . . cashback score rating'
+  'avatar sigla perfil perfil email email email'
+  'avatar nome nome nome sobrenome sobrenome sobrenome'
+  'avatar nascimento telefone telefone celular whatsapp whatsapp'
+  'avatar-img senha senha senha confirma-senha confirma-senha confirma-senha'
+  'toolbar toolbar toolbar toolbar toolbar toolbar toolbar';
+  gap: 5px;
+  padding: 5px;
+}
+
+@media(max-width: 768px) {
+  .container-user {
+    display: grid;
+    grid-template-areas:
+    'avatar'
+    'avatar-img'
+    'cashback'
+    'score'
+    'rating'
+    'sigla'
+    'perfil'
+    'email'
+    'nome'
+    'sobrenome'
+    'nascimento'
+    'telefone'
+    'celular'
+    'whatsapp'
+    'senha'
+    'confirma-senha'
+    'toolbar';
+    gap: 5px;
+    padding: 5px;
+  }
+}
+
+.container-user > div {
+  min-width: 100px;
+}
+
+.item-flex {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  flex: 1 0 auto;
+}
+
+.field-number {
+  text-align: right;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.preview {
+  width: 250px;
+  height: 250px;
+  background-position: center center;
+  background-size: cover;
+  margin-top: 10px;
+  border-radius: 10px;
+}
+
+.mat-display-1 {
+  margin: 0 0 16px;
+}
+
+mat-form-field {
+  flex: 1 0 auto;
+}
+
+.field-full-width {
+  width: 100%;
+}
+
+
+
+
+

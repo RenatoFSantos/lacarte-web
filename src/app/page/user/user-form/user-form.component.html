@@ -1,0 +1,132 @@
+<div>
+  <app-bread-crumb [items]="[{text: 'Cadastro de Usuários', link: '/users' }, {text: pageTitle}]"></app-bread-crumb>
+</div>
+
+<div class="barra-titulo">
+  <h1 class="mat-display-1">{{pageTitle}}</h1>
+</div>
+
+
+<form class="container-user" [formGroup]="formResource">
+  <div class="fieldAvatar preview" [style.background-image]="'url(&quot;' + avatar + '&quot;)'">
+  </div>
+  <!-- Cashback -->
+  <div class="fieldCashback item-flex">
+    <mat-form-field  class="field-full-width" appearance="fill">
+      <mat-label>Cashback</mat-label>
+      <input class="field-number" matInput formControlName="userVlCashback" readonly>
+    </mat-form-field>
+  </div>
+  <!-- Score -->
+  <div class="fieldScore item-flex">
+    <mat-form-field class="field-full-width" appearance="fill">
+      <mat-label>Pontos Acumulados</mat-label>
+      <input class="field-number" matInput formControlName="userVlScore" readonly>
+    </mat-form-field>
+  </div>
+  <!-- Rating -->
+  <div class="fieldRating item-flex">
+    <mat-form-field class="field-full-width" appearance="fill">
+      <mat-label>Classificação</mat-label>
+      <input class="field-number" matInput formControlName="userVlRating" readonly>
+    </mat-form-field>
+  </div>
+  <!-- Initials -->
+  <div class="fieldInitials item-flex">
+    <mat-form-field class="field-full-width" appearance="outline">
+      <mat-label>Sigla</mat-label>
+      <input matInput formControlName="userSgUser" required>
+      <mat-error><app-error-message [form-control]="formResource.get('userSgUser')"></app-error-message></mat-error>
+    </mat-form-field>
+  </div>
+  <!-- Type -->
+  <div class="fieldType item-flex">
+    <mat-form-field class="field-full-width" appearance="outline">
+      <mat-label>Perfil</mat-label>
+      <mat-select formControlName="userCdType" [(value)]="selected" required>
+        <mat-option *ngFor="let item of perfil" [value]="item.value">{{item.viewValue}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <!-- Email -->
+  <div class="fieldEmail item-flex">
+    <mat-form-field class="field-full-width" appearance="outline">
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="userDsEmail" required type="email">
+      <mat-error><app-error-message [form-control]="formResource.get('userDsEmail')"></app-error-message></mat-error>
+    </mat-form-field>
+  </div>
+  <!-- Name -->
+  <div class="fieldName item-flex">
+    <mat-form-field class="field-full-width" appearance="outline">
+      <mat-label>Nome</mat-label>
+      <input matInput formControlName="userNmName" required>
+      <mat-error><app-error-message [form-control]="formResource.get('userNmName')"></app-error-message></mat-error>
+    </mat-form-field>
+  </div>
+  <!-- Lastname -->
+  <div class="fieldLastname item-flex">
+    <mat-form-field class="field-full-width" appearance="outline">
+      <mat-label>Sobrenome</mat-label>
+      <input matInput formControlName="userNmLastname">
+    </mat-form-field>
+  </div>
+  <!-- Birthdate -->
+  <div class="fieldBirthdate item-flex">
+    <mat-form-field class="field-full-width" appearance="outline">
+      <mat-label>Nascimento</mat-label>
+      <input matInput [matDatepicker]="pickerStart" formControlName="userDtBirthdate">
+      <mat-datepicker-toggle matSuffix [for]="pickerStart"></mat-datepicker-toggle>
+      <mat-datepicker #pickerStart></mat-datepicker>
+      <mat-error><app-error-message [form-control]="formResource.get('userDtBirthdate')"></app-error-message></mat-error>
+    </mat-form-field>
+  </div>
+  <!-- Phone -->
+  <div class="fieldPhone item-flex">
+    <mat-form-field class="field-full-width" appearance="outline">
+      <mat-label>Telefone</mat-label>
+      <input matInput mask="(00) 0000-0000" placeholder="(99) 9999-9999" formControlName="userDsPhone">
+    </mat-form-field>
+  </div>
+  <!-- Smartphone -->
+  <div class="fieldSmartphone item-flex">
+    <mat-form-field class="field-full-width" appearance="outline">
+      <mat-label>Celular</mat-label>
+      <input matInput mask="(00) 00000-0000" placeholder="(99) 99999-9999" formControlName="userDsSmartphone">
+    </mat-form-field>
+  </div>
+  <!-- Whatsapp -->
+  <div class="fieldWhatsapp item-flex">
+    <mat-form-field class="field-full-width" appearance="outline">
+      <mat-label>Whatsapp</mat-label>
+      <input matInput mask="(00) 00000-0000" placeholder="(99) 99999-9999" formControlName="userDsWhatsapp"/>
+    </mat-form-field>
+  </div>
+  <!-- Password -->
+  <div class="fieldPassword  item-flex">
+    <mat-form-field class="field-full-width" appearance="outline">
+      <mat-label>Senha</mat-label>
+      <input type="password" matInput formControlName="userCdPassword" required>
+      <mat-error><app-error-message [form-control]="formResource.get('userCdPassword')"></app-error-message></mat-error>
+    </mat-form-field>
+  </div>
+  <!-- Confirm Password -->
+  <div class="fieldConfirm-password item-flex">
+    <mat-form-field class="field-full-width" appearance="outline">
+      <mat-label>Confirmação Senha</mat-label>
+      <input type="password" matInput formControlName="userCdConfirmPassword" required>
+      <mat-error><app-error-message [form-control]="formResource.get('userCdConfirmPassword')"></app-error-message></mat-error>
+    </mat-form-field>
+  </div>
+  <!-- Avatar -->
+  <div class="fieldAvatar-img item-flex">
+    <app-input-file #appInput [image]="user.userTxAvatar || 'photo_default.jpg'" (select)="selectedFile($event)"></app-input-file>
+  </div>
+  <div class="fieldToolbar">
+    <button mat-raised-button color="primary" [disabled]="!formResource.valid"  (click)="save()">Salvar</button>
+    <button mat-raised-button color="primary" routerLink="/users">Cancelar</button>
+  </div>
+
+</form>
+
+

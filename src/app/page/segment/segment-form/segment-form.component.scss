@@ -1,0 +1,76 @@
+@import 'src/assets/scss/theme';
+
+.fieldSegment {
+  grid-area: segment;
+}
+
+.fieldToolbar {
+  grid-area: toolbar;
+  // width: 100%;
+  text-align: end;
+  border: 1px solid #f2f2f2;
+  padding: 10px;
+  box-shadow: 5px 4px 10px rgba(220, 213, 213, 0.7);
+  border-radius: 5px;
+  margin-top: 10px;
+
+  button:nth-child(1) {
+    margin-right: 5px;
+  }
+}
+
+.container-user {
+  display: grid;
+  grid-template-areas:
+  'segment'
+  'toolbar';
+  gap: 5px;
+  padding: 5px;
+}
+
+.container-form > div {
+  min-width: 100px;
+}
+
+.item-flex {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  flex: 1 0 auto;
+}
+
+.field-number {
+  text-align: right;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.preview {
+  width: 250px;
+  height: 250px;
+  background-position: center center;
+  background-size: cover;
+  margin-top: 10px;
+  border-radius: 10px;
+}
+
+.mat-display-1 {
+  margin: 0 0 16px;
+}
+
+mat-form-field {
+  flex: 1 0 auto;
+}
+
+.field-full-width {
+  width: 100%;
+}
+
+#btn-cancel {
+  background-color: $quaternary-color;
+}
+
+
+
+
+

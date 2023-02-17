@@ -1,0 +1,431 @@
+@import '../../../../assets/scss/theme';
+
+mat-form-field {
+  flex: 1 0 auto;
+}
+
+.avatar-titulo {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin-bottom: 30px;
+}
+
+.mat-display-1 {
+  margin-bottom: 5px;
+}
+
+.space-title {
+  flex: 1 0 auto;
+}
+
+.new-record {
+  justify-self: flex-end;
+}
+
+.preview-showcase {
+  // float: left;
+  background-position: center center;
+  background-size: cover;
+  margin-top: 0px;
+  margin-right: 20px;
+  margin-bottom: 0px;
+  border-radius: 10px;
+  object-fit: contain;
+}
+
+.preview {
+  float: left;
+  background-position: center center;
+  background-size: cover;
+  margin-top: 0px;
+  margin-right: 20px;
+  margin-bottom: 0px;
+  border-radius: 10px;
+  object-fit: contain;
+}
+
+.preview_small {
+  @extend .preview;
+  width: 100px;
+  height: 100px;
+}
+
+.fieldLogo {
+  grid-area: logo;
+}
+
+.fieldLogoImg {
+  grid-area: logo-img;
+  justify-self: center;
+  margin-bottom: 0px;
+  & span {
+    font-size: 0.8rem !important;
+    width: 100%;
+    margin: 0 auto;
+    color: $primary-color;
+  }
+}
+
+.fieldShowCase {
+  grid-area: showcase;
+  & span {
+    font-size: 0.8rem !important;
+    width: 100%;
+    margin: 0 auto;
+    color: $primary-color;
+  }
+}
+
+.fieldShowCaseImg {
+  width: 100%;
+  grid-area: showcase-img;
+  justify-self: center;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-bottom: 0px;
+}
+
+.fieldRating {
+  grid-area: rating;
+  color: $primary-color;
+}
+
+.fieldSegment {
+  grid-area: segment;
+}
+
+.fieldUserEmail {
+  grid-area: user_email;
+}
+
+.fieldUserName {
+  grid-area: user_name;
+  color: $primary-color;
+}
+
+.fieldUserSmartphone {
+  grid-area: user_smartphone;
+  color: $primary-color;
+}
+
+.fieldTrademark {
+  grid-area: trademark;
+}
+
+.fieldPix {
+  grid-area: pix;
+}
+
+.fieldCNPJ {
+  grid-area: cnpj;
+}
+
+.fieldCompany {
+  grid-area: company;
+}
+
+.fieldDescription {
+  grid-area: description;
+}
+
+.fieldPhone {
+  grid-area: phone;
+}
+
+.fieldSmartphone {
+  grid-area: smartphone;
+}
+
+.fieldWhatsapp {
+  grid-area: whatsapp;
+}
+
+.fieldEmail {
+  grid-area: email;
+}
+
+.fieldSite {
+  grid-area: site;
+}
+
+.fieldDelivery {
+  grid-area: delivery;
+  font-size: 1.2rem;
+}
+
+.fieldTaxDelivery {
+  grid-area: tax_delivery;
+}
+
+.fieldValueDelivery {
+  grid-area: value_delivery;
+}
+
+.fieldTags {
+  grid-area: tags;
+}
+
+.fieldSubform {
+  grid-area: subform;
+}
+
+.fieldSubtitle {
+  grid-area: subtitle;
+  margin-bottom: 10px;
+  span {
+    background-color: #454545;
+    color: white;
+    padding: 10px 30px;
+  }
+}
+
+.fieldType {
+  grid-area: type;
+}
+
+.fieldReference {
+  grid-area: reference;
+}
+
+.fieldAddress {
+  grid-area: address;
+}
+
+.fieldNumber {
+  grid-area: number;
+}
+
+.fieldComplement {
+  grid-area: complement;
+}
+
+.fieldDistrict {
+  grid-area: district;
+}
+
+.fieldCity {
+  grid-area: city;
+}
+
+.fieldState {
+  grid-area: state;
+}
+
+.fieldZipcode {
+  grid-area: zipcode;
+}
+
+.fieldToolbar {
+  grid-area: toolbar;
+  // width: 100%;
+  text-align: end;
+  border: 1px solid #f2f2f2;
+  padding: 10px;
+  box-shadow: 5px 4px 10px rgba(220, 213, 213, 0.7);
+  border-radius: 5px;
+  margin-top: 10px;
+
+  button:nth-child(1) {
+    margin-right: 5px;
+  }
+}
+
+.container-form {
+  display: grid;
+  grid-template-areas:
+  'logo . . . . . . rating'
+  'logo segment trademark trademark trademark pix pix pix'
+  'logo company company company company cnpj cnpj cnpj'
+  'logo-img description description description description description description description'
+  'phone phone phone smartphone smartphone whatsapp whatsapp whatsapp'
+  'email email email email site site site site'
+  'showcase-img showcase-img user_email user_email user_email user_name user_name user_smartphone'
+  'showcase-img showcase-img tags tags tags tags tags tags'
+  'showcase-img showcase-img tax_delivery tax_delivery value_delivery value_delivery delivery delivery'
+  'showcase showcase . . . . . .'
+  'subtitle subtitle subtitle subtitle subtitle subtitle subtitle subtitle'
+  'type reference reference reference reference reference reference reference'
+  'address address address address address address number number'
+  'complement complement complement complement complement complement complement complement'
+  'district district district city city city state zipcode'
+  'toolbar toolbar toolbar toolbar toolbar toolbar toolbar toolbar';
+  gap: 5px;
+  padding: 5px;
+}
+
+@media(max-width: 768px) {
+  .container-form {
+    display: grid;
+    grid-template-areas:
+    'logo'
+    'logo-img'
+    'rating'
+    'segment'
+    'trademark'
+    'pix'
+    'company'
+    'cnpj'
+    'description'
+    'phone'
+    'smartphone'
+    'whatsapp'
+    'email'
+    'site'
+    'user_email'
+    'user_name'
+    'user_smartphone'
+    'tags'
+    'tax_delivery'
+    'value_delivery'
+    'delivery'
+    'showcase'
+    'showcase-img'
+    'type'
+    'reference'
+    'address'
+    'number'
+    'complement'
+    'district'
+    'city'
+    'state'
+    'zipcode'
+    'toolbar';
+    gap: 5px;
+    padding: 5px;
+  }
+}
+
+.container-form > div {
+  min-width: 100px;
+}
+
+.item-flex {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  flex: 1 0 auto;
+}
+
+.field-full-width {
+  width: 100%;
+}
+
+td.actions {
+  width: 150px;
+
+  button {
+    min-width: 40px;
+    padding: 0px !important;
+    float: left;
+  }
+
+  button:first-child {
+    margin-right: 10px;
+  }
+
+  button:nth-child(2) {
+    color: red;
+    margin-right: 10px;
+  }
+
+}
+
+.mat-list-base {
+  padding-top: 0;
+}
+
+mat-list {
+  max-height: 150px;
+  overflow: auto;
+  margin-bottom: 20px;
+  border-bottom: 2px solid black;
+}
+
+mat-list-item:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+h3.header-list {
+  line-height: 3;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-left: 10px;
+  background-color: #252525;
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+mat-checkbox {
+  margin: 0 10px;
+}
+
+#titulo {
+  display: block;
+  font-size: 1.5em;
+  margin-bottom: 0px;
+  font-weight: bold;
+}
+
+.container-toolbar {
+  // padding-top: 65px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  mat-form-field {
+    flex: 1 auto;
+    margin-right: 10px;
+    margin-bottom: -15px;
+  }
+
+  button {
+    margin-top: 3px;
+    margin-bottom: 10px;
+  }
+}
+
+.div-table th {
+  font-size: larger;
+  font-weight: 500;
+  color: darken($color: #000000, $amount: 0);
+}
+
+th.mat-header-cell,
+.paginator {
+  background-color: #dcdcdc;
+}
+
+.div-table {
+  width: 100%;
+}
+
+.div-table>* {
+  width: 100%;
+}
+
+.toolbar___head {
+  width: calc(100% - 10px);
+  text-align: left;
+  padding: 5px;
+}
+
+.toolbar___footer {
+  width: calc(100% - 20px);
+  text-align: right;
+  border: 1px solid #f2f2f2;
+  padding: 10px;
+  border-radius: 5px;
+  margin-top: 10px;
+  margin-bottom: 50px;
+
+  button {
+    margin-left: 10px;
+  }
+}
+
+
+
+

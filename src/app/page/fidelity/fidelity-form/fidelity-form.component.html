@@ -1,0 +1,55 @@
+<!-- ******** BREADCRUMB ********** -->
+<div>
+  <app-bread-crumb [items]="[{text: 'Cadastro de Empresas', link: '/companies'}, {text: 'Cadastro de Promoções', link: '/companies/' + fidelity.promotion.company.uid + '/promotion'}, {text: 'Fidelização', link: '/companies/' + fidelity.promotion.company.uid + '/promotion/' + fidelity.promotion.uid + '/fidelity'}, {text: pageTitle}]"></app-bread-crumb>
+</div>
+
+<div class="barra-titulo">
+  <h1 class="mat-display-1">{{pageTitle}}</h1>
+  <h2>Empresa: {{promotion.company.compNmTrademark}}</h2>
+</div>
+
+<!-- *** EDITION FORM *** -->
+<form #form="ngForm" *ngIf="formResource" [formGroup]="formResource" class="container-form full-width">
+
+  <!-- ******** PROMOTION ********** -->
+  <div class="fieldPromotion item-flex">
+    <mat-form-field class="field-full-width" appearance="outline">
+      <mat-label>Promoção</mat-label>
+      <input matInput placeholder="digite o nome da sua promoção" formControlName="promNmPromotion" readonly>
+    </mat-form-field>
+  </div>
+  <!-- ******** NUMBER OF VOUCHERS ********** -->
+  <div class="fieldVoucher item-flex">
+    <mat-form-field class="field-full-width" appearance="outline">
+      <mat-label>Qtd. Vouchers</mat-label>
+      <input matInput formControlName="fideQnVoucher">
+      <mat-error><app-error-message [form-control]="formResource.get('fideQnVoucher')"></app-error-message></mat-error>
+    </mat-form-field>
+  </div>
+  <!-- ******** USER NAME ********** -->
+  <div class="fieldUser item-flex">
+    <mat-form-field class="field-full-width" appearance="outline">
+      <mat-label>Usuário</mat-label>
+      <input matInput formControlName="userNmName">
+      <mat-error><app-error-message [form-control]="formResource.get('userNmName')"></app-error-message></mat-error>
+    </mat-form-field>
+  </div>
+  <!-- ******** USER ID ********** -->
+  <div class="fieldUserid item-flex">
+    <mat-form-field class="field-full-width" appearance="outline">
+      <mat-label>ID</mat-label>
+      <input matInput formControlName="userUid">
+    </mat-form-field>
+  </div>
+  <!-- ******** VALIDATE ********** -->
+  <div class="fieldValidate item-flex">
+    <mat-checkbox class="example-margin" formControlName="fideInValidate">Válido</mat-checkbox>
+  </div>
+
+  <!-- ******** TOOLBAR ********** -->
+  <div class="fieldToolbar">
+    <button mat-raised-button type="submit" color="primary" [disabled]="formResource.invalid" (click)="onFormSubmit()">Salvar</button>
+    <button mat-raised-button routerLink="/companies/{{fidelity.promotion.company.uid}}/promotion/{{fidelity.promotion.uid}}/fidelity">Cancelar</button>
+  </div>
+</form>
+

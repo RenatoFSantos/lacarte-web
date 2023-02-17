@@ -1,0 +1,124 @@
+@import 'src/assets/scss/theme';
+
+.fieldId {
+  grid-area: id;
+}
+
+.fieldProduct {
+  grid-area: product;
+}
+
+.fieldCategory {
+  grid-area: category;
+}
+
+.fieldDescription {
+  grid-area: description;
+}
+
+.fieldRecipe {
+  grid-area: recipe;
+}
+
+.fieldDescriptor {
+  grid-area: descriptor;
+}
+
+.fieldImage {
+  grid-area: image-prod;
+  justify-self: center;
+}
+
+.fieldImageSelect {
+  grid-area: image-btn;
+  justify-self: center;
+}
+
+.fieldToolbar {
+  grid-area: toolbar;
+  // width: 100%;
+  text-align: end;
+  border: 1px solid #f2f2f2;
+  padding: 10px;
+  box-shadow: 5px 4px 10px rgba(220, 213, 213, 0.7);
+  border-radius: 5px;
+  margin-top: 10px;
+
+  button:nth-child(1) {
+    margin-right: 5px;
+  }
+}
+
+.container-form {
+  display: grid;
+  grid-template-areas:
+  'image-prod id id product product product product category category'
+  'image-prod description description description description description description description description'
+  'image-btn recipe recipe recipe recipe recipe recipe recipe recipe'
+  'descriptor descriptor descriptor descriptor descriptor descriptor descriptor descriptor descriptor'
+  'toolbar toolbar toolbar toolbar toolbar toolbar toolbar toolbar toolbar';
+  gap: 5px;
+  padding: 5px;
+}
+
+@media(max-width: 768px) {
+  .container-form {
+    display: grid;
+    grid-template-areas:
+    'image-prod'
+    'image-btn'
+    'id'
+    'product'
+    'category'
+    'description'
+    'recipe'
+    'descriptor'
+    'toolbar';
+    gap: 5px;
+    padding: 5px;
+  }
+}
+
+.container-form > div {
+  min-width: 100px;
+}
+
+.item-flex {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  flex: 1 0 auto;
+}
+
+.field-number {
+  text-align: right;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.preview {
+  width: 200px;
+  height: 200px;
+  background-position: center center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  margin-top: 10px;
+  border-radius: 10px;
+}
+
+.mat-display-1 {
+  margin: 0 0 16px;
+}
+
+mat-form-field {
+  flex: 1 0 auto;
+}
+
+.field-full-width {
+  width: 100%;
+}
+
+
+
+
+

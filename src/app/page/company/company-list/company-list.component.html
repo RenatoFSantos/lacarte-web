@@ -1,0 +1,78 @@
+<div>
+  <app-bread-crumb [items]="[{text: pageTitle}]"></app-bread-crumb>
+</div>
+
+<div class="barra-titulo">
+  <h1 class="mat-display-1">{{pageTitle}}</h1>
+</div>
+
+<div class="toolbar_search">
+  <mat-form-field appearance="outline">
+    <mat-label>Pesquisar</mat-label>
+    <input #fieldSearch matInput placeholder="Pesquisar...">
+  </mat-form-field>
+  <button mat-raised-button color="primary" routerLink="new" >Inserir</button>
+</div>
+
+<div>
+  <table mat-table  class="mat-elevation-z8 table" [dataSource]="dataResource" matSort (matSortChange)="sortData($event)">
+    <!-- Company Column -->
+    <ng-container matColumnDef="EMPRESA">
+      <th mat-header-cell *matHeaderCellDef width="20%">EMPRESA</th>
+      <td mat-cell *matCellDef="let element"> {{element.compNmTrademark}} </td>
+    </ng-container>
+
+    <!-- Company Column -->
+    <ng-container matColumnDef="CNPJ">
+      <th mat-header-cell *matHeaderCellDef width="15%">CNPJ</th>
+      <td mat-cell *matCellDef="let element"> {{element.compCdCNPJ | cnpj_mask}} </td>
+    </ng-container>
+
+    <!-- Company Column -->
+    <ng-container matColumnDef="TELEFONE">
+      <th mat-header-cell *matHeaderCellDef width="15%">TELEFONE</th>
+      <td mat-cell *matCellDef="let element"> {{element.compDsPhone | phone_mask}} </td>
+    </ng-container>
+
+    <!-- Company Column -->
+    <ng-container matColumnDef="CELULAR">
+      <th mat-header-cell *matHeaderCellDef width="15%">CELULAR</th>
+      <td mat-cell *matCellDef="let element"> {{element.compDsSmartphone | phone_mask}} </td>
+    </ng-container>
+
+    <!-- Company Column -->
+    <ng-container matColumnDef="WHATSAPP">
+      <th mat-header-cell *matHeaderCellDef width="15%">WHATSAPP</th>
+      <td mat-cell *matCellDef="let element"> {{element.compDsWhatsapp | phone_mask}} </td>
+    </ng-container>
+
+    <!-- Action Column -->
+    <ng-container matColumnDef="uid">
+      <th mat-header-cell *matHeaderCellDef width="20%"></th>
+      <td mat-cell *matCellDef="let element" class="actions">
+        <button [disabled]="userLogged.userCdType=='V'" id="btn-edit" mat-icon-button routerLink="/companies/{{element.uid}}/edit">
+           <mat-icon>edit</mat-icon>
+        </button>
+        <button [disabled]="userLogged.userCdType=='V' || userLogged.userCdType=='E'" id="btn-delete" mat-icon-button (click)="delete(element)">
+          <mat-icon>delete</mat-icon>
+        </button>
+        <button [disabled]="userLogged.userCdType=='V' || userLogged.userCdType=='E'" id="btn-menu" mat-icon-button routerLink="/companies/{{element.uid}}/menu">
+          <mat-icon>summarize</mat-icon>
+        </button>
+        <button [disabled]="userLogged.userCdType=='V' || userLogged.userCdType=='E'" id="btn-menu" mat-icon-button routerLink="/companies/{{element.uid}}/promotion">
+          <mat-icon>redeem</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <h3 *ngIf="resourceListFull===undefined || resourceListFull.length==0">Nenhum registro cadastrado.</h3>
+  <mat-paginator [length]="length"
+                [pageSize]="pageSize"
+                [pageSizeOptions]="pageSizeOptions"
+                (page)="pageEvent = $event"
+                aria-label="Select page">
+  </mat-paginator>
+</div>
+

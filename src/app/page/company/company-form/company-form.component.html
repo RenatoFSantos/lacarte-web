@@ -1,0 +1,266 @@
+<!-- ******** BREADCRUMB ********** -->
+<div>
+  <app-bread-crumb [items]="[{text: 'Cadastro de Empresas', link: '/companies'}, {text: pageTitle}]"></app-bread-crumb>
+</div>
+
+<div class="avatar-titulo barra-titulo">
+  <h1 class="mat-display-1">{{pageTitle}}</h1>
+  <div class="space-title"></div>
+  <div class="new-record">
+    <button mat-raised-button color="primary" (click)="newCompany()">Nova Empresa</button>
+  </div>
+</div>
+
+<!-- *** EDITION FORM *** -->
+<form #form="ngForm" *ngIf="formResource" [formGroup]="formResource" class="container-form full-width">
+
+  <!-- ******** LOGO ********** -->
+  <div class="fieldLogo preview" [style.background-image]="'url(&quot;' + logo + '&quot;)'">
+  </div>
+  <!-- ******** SELECT LOGO ********** -->
+  <div class="fieldLogoImg item-flex">
+    <span>Logomarca</span>
+    <app-input-file #appInput [image]="company.compDsLogo || 'logo_default.jpg'" (select)="selectedFileLogo($event)"></app-input-file>
+  </div>
+  <!-- ******** RATING ********** -->
+  <div class="fieldRating item-flex">
+    <mat-form-field class="field-full-width" appearance="fill">
+      <mat-label>Classificação</mat-label>
+      <input class="field-number" matInput mask="separator.2" thousandSeparator="." formControlName="compVlRating" readonly>
+    </mat-form-field>
+  </div>
+  <!-- ******** SEGMENT ********** -->
+  <div class="fieldSegment item-flex">
+    <mat-form-field class="field-full-width" appearance="outline">
+      <mat-label>Segmento</mat-label>
+      <mat-select  [(value)]="selected" formControlName="segment">
+        <mat-option *ngFor="let segment of listSegments" [value]="segment.uid">
+          {{segment.segmNmSegment}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <!-- ******** TRADEMARK NAME ********** -->
+  <div class="fieldTrademark item-flex">
+    <mat-form-field class="field-full-width" appearance="outline">
+      <mat-label>Fantasia</mat-label>
+      <input matInput placeholder="digite seu nome fantasia" formControlName="compNmTrademark" required>
+      <mat-error><app-error-message [form-control]="formResource.get('compNmTrademark')"></app-error-message></mat-error>
+    </mat-form-field>
+  </div>
+  <!-- ******** PIX ********** -->
+  <div class="fieldPix item-flex">
+    <mat-form-field class="field-full-width" appearance="outline">
+      <mat-label>PIX</mat-label>
+      <input matInput placeholder="digite seu PIX" formControlName="compCdPix">
+    </mat-form-field>
+  </div>
+  <!-- ******** NAME ********** -->
+  <div class="fieldCompany item-flex">
+    <mat-form-field class="field-full-width" appearance="outline">
+      <mat-label>Razão Social</mat-label>
+      <input matInput placeholder="digite sua Razão Social" formControlName="compNmCompany" required>
+      <mat-error><app-error-message [form-control]="formResource.get('compNmCompany')"></app-error-message></mat-error>
+    </mat-form-field>
+  </div>
+  <!-- ******** CNPJ ********** -->
+  <div class="fieldCNPJ item-flex">
+    <mat-form-field class="field-full-width" appearance="outline">
+      <mat-label>CNPJ</mat-label>
+      <input matInput mask="00.000.000/0000-00" placeholder="00.000.000/0000-00" formControlName="compCdCNPJ" required>
+      <mat-error><app-error-message [form-control]="formResource.get('compCdCNPJ')"></app-error-message></mat-error>
+    </mat-form-field>
+  </div>
+  <!-- ******** DESCRIPTION ********** -->
+  <div class="fieldDescription item-flex">
+    <mat-form-field class="field-full-width" appearance="outline">
+      <mat-label>Descrição</mat-label>
+      <input matInput placeholder="digite uma descrição da empresa" formControlName="compDsCompany">
+    </mat-form-field>
+  </div>
+  <!-- ******** PHONE ********** -->
+  <div class="fieldPhone item-flex">
+    <mat-form-field class="field-full-width" appearance="outline">
+      <mat-label>Telefone</mat-label>
+      <input matInput mask="(00) 0000-0000" placeholder="(99) 9999-9999" formControlName="compDsPhone">
+    </mat-form-field>
+  </div>
+  <!-- ******** SMARTPHONE ********** -->
+  <div class="fieldSmartphone item-flex">
+    <mat-form-field class="field-full-width" appearance="outline">
+      <mat-label>Celular</mat-label>
+      <input matInput mask="(00) 00000-0000" placeholder="(99) 99999-9999" formControlName="compDsSmartphone">
+    </mat-form-field>
+  </div>
+  <!-- ******** WHATSAPP ********** -->
+  <div class="fieldWhatsapp item-flex">
+    <mat-form-field class="field-full-width" appearance="outline">
+      <mat-label>Whatsapp</mat-label>
+      <input matInput mask="(00) 00000-0000" placeholder="(99) 99999-9999" formControlName="compDsWhatsapp"/>
+    </mat-form-field>
+  </div>
+  <!-- ******** EMAIL ********** -->
+  <div class="fieldEmail item-flex">
+    <mat-form-field class="field-full-width" appearance="outline">
+      <mat-label>Email</mat-label>
+      <input matInput placeholder="digite seu email" formControlName="compDsEmail" required>
+      <mat-error><app-error-message [form-control]="formResource.get('compDsEmail')"></app-error-message></mat-error>
+    </mat-form-field>
+  </div>
+  <!-- ******** SITE ********** -->
+  <div class="fieldSite item-flex">
+    <mat-form-field class="field-full-width" appearance="outline">
+      <mat-label>Site</mat-label>
+      <input matInput placeholder="digite o endereço do seu site" formControlName="compDsSite">
+    </mat-form-field>
+  </div>
+  <!-- ******** USER EMAIL ********** -->
+  <div class="fieldUserEmail item-flex">
+    <mat-form-field class="field-full-width" appearance="outline">
+      <mat-label>Email do Administrador</mat-label>
+      <input matInput #searchEmail placeholder="digite seu email" formControlName="userDsEmail" required>
+      <mat-icon matSuffix>search</mat-icon>
+      <mat-error><app-error-message [form-control]="formResource.get('userDsEmail')"></app-error-message></mat-error>
+    </mat-form-field>
+  </div>
+  <!-- ******** USER NAME ********** -->
+  <div class="fieldUserName item-flex">
+    <mat-form-field class="field-full-width" appearance="fill">
+      <mat-label>Nome do Usuário</mat-label>
+      <input matInput type="text" formControlName="userNmName" readonly>
+    </mat-form-field>
+  </div>
+  <!-- ******** USER SMARTPHONES ********** -->
+  <div class="fieldUserSmartphone item-flex">
+    <mat-form-field class="field-full-width" appearance="fill">
+      <mat-label>Celular do Usuário</mat-label>
+      <input matInput mask="(00) 00000-0000" type="text" formControlName="userDsSmartphone" readonly>
+    </mat-form-field>
+  </div>
+  <!-- ******** TAGS ********** -->
+  <div class="fieldTags item-flex">
+    <mat-form-field class="field-full-width" appearance="outline">
+      <mat-label>Tags</mat-label>
+      <input matInput placeholder="digite seus descritores separados por vírgula" maxlength="100" formControlName="compDsTags">
+    </mat-form-field>
+  </div>
+  <!-- ******** DELIVERY TAX ********** -->
+  <div class="fieldTaxDelivery item-flex">
+    <mat-form-field class="field-full-width" appearance="outline">
+      <mat-label>Taxa Delivery</mat-label>
+      <mat-select [(value)]="taxSelected" formControlName="compCdDelivery">
+        <mat-option *ngFor="let taxDelivery of taxsDelivery" [value]="taxDelivery.value">
+          {{taxDelivery.viewValue}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <!-- ******** DELIVERY VALUE ********** -->
+  <div class="fieldValueDelivery item-flex">
+    <mat-form-field class="field-full-width" appearance="outline">
+      <mat-label>{{formResource.get('compCdDelivery')?.value === 'V' ? 'R$/Delivery' : '%/Delivery'}}</mat-label>
+      <input matInput type="text" placeholder="digite o valor da taxa do delivery" mask="separator.2" thousandSeparator="." formControlName="compVlDelivery">
+      <mat-error><app-error-message [form-control]="formResource.get('compVlDelivery')"></app-error-message></mat-error>
+    </mat-form-field>
+  </div>
+  <!-- ******** DELIVERY ********** -->
+  <div class="fieldDelivery item-flex">
+    <mat-checkbox formControlName="compInDelivery">
+      Delivery
+    </mat-checkbox>
+  </div>
+  <!-- ******** SHOWCASE IMAGE ********** -->
+  <div class="fieldShowCaseImg preview-showcase item-flex" [style.background-image]="'url(&quot;' + showcase + '&quot;)'">
+  </div>
+  <!-- ******** SELECT SHOWCASE ********** -->
+  <div class="fieldShowCase item-flex">
+    <span>Capa</span>
+    <app-input-file #appInput [image]="company.compTxImage || 'showcase_default.jpg'" (select)="selectedFileShowCase($event)"></app-input-file>
+  </div>
+
+  <!-- ************************************************************************************************** -->
+  <!-- ******** ADDRESS TITLE *************************************************************************** -->
+  <!-- ************************************************************************************************** -->
+  <div class="fieldSubtitle item-flex">
+    <span>ENDEREÇO</span>
+    <mat-divider class="field-full-width"></mat-divider>
+  </div>
+  <!-- ******** ADDRESS TYPE ********** -->
+  <div class="form-group fieldType item-flex">
+    <mat-form-field class="field-full-width" appearance="outline">
+      <mat-label>Tipo Endereço</mat-label>
+      <mat-select [(value)]="typeSelected" formControlName="addrCdType">
+        <mat-option *ngFor="let typeAddress of typesAddress" [value]="typeAddress.value">
+          {{typeAddress.viewValue}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <!-- ******** REFERENCE NAME ********** -->
+  <div class="form-group fieldReference item-flex">
+    <mat-form-field class="field-full-width" appearance="outline">
+      <mat-label>Nome de Referência</mat-label>
+      <input matInput placeholder="defina um nome de referência" formControlName="addrNmAddress" required>
+      <mat-error><app-error-message [form-control]="formResource.get('addrNmAddress')"></app-error-message></mat-error>
+    </mat-form-field>
+  </div>
+  <!-- ******** ADDRESS ********** -->
+  <div class="form-group fieldAddress item-flex">
+    <mat-form-field class="field-full-width" appearance="outline">
+      <mat-label>Endereço</mat-label>
+      <input matInput placeholder="preencha o endereço" formControlName="addrDsAddress" required>
+      <mat-error><app-error-message [form-control]="formResource.get('addrDsAddress')"></app-error-message></mat-error>
+    </mat-form-field>
+  </div>
+  <!-- ******** NUMBER ********** -->
+  <div class="form-group fieldNumber item-flex">
+    <mat-form-field class="field-full-width" appearance="outline">
+      <mat-label>Número</mat-label>
+      <input matInput placeholder="preencha o número" formControlName="addrDsNumber">
+    </mat-form-field>
+  </div>
+  <!-- ******** COMPLEMENT ********** -->
+  <div class="form-group fieldComplement item-flex">
+    <mat-form-field class="field-full-width" appearance="outline">
+      <mat-label>Complemento</mat-label>
+      <input matInput placeholder="preencha o complemento" formControlName="addrDsComplement">
+    </mat-form-field>
+  </div>
+  <!-- ******** DISTRICT ********** -->
+  <div class="form-group fieldDistrict item-flex">
+    <mat-form-field class="field-full-width" appearance="outline">
+      <mat-label>Bairro</mat-label>
+      <input matInput placeholder="preencha o bairro" formControlName="addrNmDistrict">
+    </mat-form-field>
+  </div>
+  <!-- ******** CITY ********** -->
+  <div class="form-group fieldCity item-flex">
+    <mat-form-field class="field-full-width" appearance="outline">
+      <mat-label>Cidade</mat-label>
+      <input matInput placeholder="preencha o nome da cidade" formControlName="addrNmCity" required>
+      <mat-error><app-error-message [form-control]="formResource.get('addrNmCity')"></app-error-message></mat-error>
+    </mat-form-field>
+  </div>
+  <!-- ******** STATE ********** -->
+  <div class="form-group fieldState item-flex">
+    <mat-form-field class="field-full-width" appearance="outline">
+      <mat-label>UF</mat-label>
+      <mat-select formControlName="addrSgState">
+        <mat-option *ngFor="let state of keys(states)" [value]="state">
+          {{states[state]}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <!-- ******** ZIPCODE ********** -->
+  <div class="form-group fieldZipcode item-flex">
+    <mat-form-field class="field-full-width" appearance="outline">
+      <mat-label>CEP</mat-label>
+      <input matInput mask="00000-000" placeholder="00000-000" formControlName="addrCdZipcode" required>
+    </mat-form-field>
+  </div>
+  <div class="fieldToolbar">
+    <button mat-raised-button type="submit" color="primary" [disabled]="formResource.invalid" (click)="onFormSubmit()">Salvar</button>
+    <button mat-raised-button routerLink="/companies">Cancelar</button>
+  </div>
+</form>

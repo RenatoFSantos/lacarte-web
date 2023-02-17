@@ -1,0 +1,32 @@
+<div>
+  <app-bread-crumb [items]="[{text: 'Cadastro de Categorias', link: '/categories' }, {text: pageTitle}]"></app-bread-crumb>
+</div>
+
+<div class="barra-titulo">
+  <h1 class="mat-display-1">{{pageTitle}}</h1>
+</div>
+
+
+<form class="container-form" [formGroup]="formResource">
+  <div class="fieldImage preview" [style.background-image]="'url(&quot;' + imgCategory + '&quot;)'">
+  </div>
+  <!-- Category -->
+  <div class="fieldCategory item-flex">
+    <mat-form-field class="field-full-width" appearance="outline">
+      <mat-label>Categoria</mat-label>
+      <input matInput formControlName="cateNmCategory" required>
+      <mat-error><app-error-message [form-control]="formResource.get('cateNmCategory')"></app-error-message></mat-error>
+    </mat-form-field>
+  </div>
+  <!-- Select image -->
+  <div class="fieldImageSelect item-flex">
+    <app-input-file #appInput [image]="category.cateTxImage || 'category_default.jpg'" (select)="selectedFile($event)"></app-input-file>
+  </div>
+  <div class="fieldToolbar">
+    <button mat-raised-button color="primary" [disabled]="!formResource.valid"  (click)="save()">Salvar</button>
+    <button mat-raised-button color="primary" routerLink="/categories">Cancelar</button>
+  </div>
+
+</form>
+
+

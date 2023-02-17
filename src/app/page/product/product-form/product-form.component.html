@@ -1,0 +1,79 @@
+<div>
+  <app-bread-crumb [items]="[{text: 'Cadastro de Produtos', link: '/products' }, {text: pageTitle}]"></app-bread-crumb>
+</div>
+
+<div class="barra-titulo">
+  <h1 class="mat-display-1">{{pageTitle}}</h1>
+</div>
+
+
+<!-- *** EDITION FORM *** -->
+<form #form="ngForm" *ngIf="formResource" [formGroup]="formResource" class="container-form full-width">
+
+  <!-- ******** IMAGE ********** -->
+  <div class="fieldImage preview" [style.background-image]="'url(&quot;' + image + '&quot;)'">
+  </div>
+  <!-- ******** SELECT IMAGE ********** -->
+  <div class="fieldImageSelect item-flex">
+    <app-input-file #appInput [image]="product.prodTxImage || 'product_default.png'" (select)="selectedFile($event)"></app-input-file>
+  </div>
+  <!-- ******** ID ********** -->
+  <div class="fieldId item-flex">
+    <mat-form-field class="field-full-width" appearance="outline">
+      <mat-label>Código</mat-label>
+      <input matInput placeholder="digite seu código" formControlName="prodCdStandard">
+    </mat-form-field>
+  </div>
+  <!-- ******** PRODUCT ********** -->
+  <div class="fieldProduct item-flex">
+    <mat-form-field class="field-full-width" appearance="outline">
+      <mat-label>Produto</mat-label>
+      <input matInput placeholder="digite o nome do produto" formControlName="prodNmProduct" required>
+      <mat-error><app-error-message [form-control]="formResource.get('prodNmProduct')"></app-error-message></mat-error>
+    </mat-form-field>
+  </div>
+  <!-- ******** CATEGORY ********** -->
+  <div class="fieldCategory item-flex">
+    <mat-form-field appearance="outline">
+      <mat-label>Categoria</mat-label>
+      <mat-select  [(value)]="selected" formControlName="category">
+        <mat-option *ngFor="let category of listCategories" [value]="category.uid">
+          {{category.cateNmCategory}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <!-- ******** DESCRIPTION ********** -->
+  <div class="fieldDescription item-flex">
+    <mat-form-field class="field-full-width" appearance="outline">
+      <mat-label>Descrição</mat-label>
+      <input matInput placeholder="digite a descrição" formControlName="prodDsProduct">
+    </mat-form-field>
+  </div>
+  <!-- ******** RECIPE ********** -->
+  <div class="fieldRecipe item-flex">
+    <mat-form-field class="field-full-width" appearance="outline">
+      <mat-label>Receita</mat-label>
+      <textarea matInput
+      cdkTextareaAutosize
+      #autosize="cdkTextareaAutosize"
+      cdkAutosizeMinRows="5"
+      cdkAutosizeMaxRows="5"
+      formControlName="prodDsRecipe"></textarea>
+    </mat-form-field>
+  </div>
+  <!-- ******** DESCRIPTOR ********** -->
+  <div class="fieldDescriptor item-flex">
+    <mat-form-field class="field-full-width" appearance="outline">
+      <mat-label>Descritores</mat-label>
+      <input matInput placeholder="digite descritores separados por vírgula" formControlName="prodDsDescriptor">
+    </mat-form-field>
+  </div>
+  <div class="fieldToolbar">
+    <button mat-raised-button type="submit" color="primary" [disabled]="formResource.invalid" (click)="onFormSubmit()">Salvar</button>
+    <button mat-raised-button routerLink="/products">Cancelar</button>
+  </div>
+</form>
+
+
+

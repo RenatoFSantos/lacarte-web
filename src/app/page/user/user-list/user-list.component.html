@@ -1,0 +1,68 @@
+<div>
+  <app-bread-crumb [items]="[{text: pageTitle}]"></app-bread-crumb>
+</div>
+
+<div class="barra-titulo">
+  <h1 class="mat-display-1">{{pageTitle}}</h1>
+</div>
+
+<div class="toolbar_search">
+  <mat-form-field appearance="outline">
+    <mat-label>Pesquisar</mat-label>
+    <input #fieldSearch matInput placeholder="Pesquisar...">
+  </mat-form-field>
+  <button mat-raised-button color="primary" routerLink="new" >Inserir</button>
+</div>
+
+<div>
+  <table mat-table  class="mat-elevation-z8 table" [dataSource]="dataResource" matSort (matSortChange)="sortData($event)">
+    <!-- Initials Column -->
+    <ng-container matColumnDef="Sigla">
+      <th mat-header-cell *matHeaderCellDef width="15%">SIGLA</th>
+      <td mat-cell *matCellDef="let element"> {{element.userSgUser}} </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="Nome">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header width="30%">NOME</th>
+      <td mat-cell *matCellDef="let element"> {{element.userNmName}} </td>
+    </ng-container>
+
+    <!-- LastName Column -->
+    <ng-container matColumnDef="Sobrenome">
+      <th mat-header-cell *matHeaderCellDef width="25%">SOBRENOME</th>
+      <td mat-cell *matCellDef="let element"> {{element.userNmLastname}} </td>
+    </ng-container>
+
+    <!-- Type Column -->
+    <ng-container matColumnDef="Tipo">
+      <th mat-header-cell *matHeaderCellDef width="15%">TIPO</th>
+      <td mat-cell *matCellDef="let element"> {{element.userCdType}} </td>
+    </ng-container>
+
+    <!-- Action Column -->
+    <ng-container matColumnDef="uid">
+      <th mat-header-cell *matHeaderCellDef width="15%"></th>
+      <td mat-cell *matCellDef="let element" class="actions">
+        <button [disabled]="userLogged.userCdType=='V'" id="btn-edit" mat-icon-button routerLink="/users/{{element.uid}}/edit">
+           <mat-icon>edit</mat-icon>
+        </button>
+        <button [disabled]="userLogged.userCdType=='V' || userLogged.userCdType=='E'" id="btn-delete" mat-icon-button (click)="delete(element)">
+          <mat-icon>delete</mat-icon>
+        </button>
+        <button [disabled]="userLogged.userCdType=='V' || userLogged.userCdType=='E'" id="btn-address" mat-icon-button routerLink="/users/{{element.uid}}/address">
+          <mat-icon>home</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <mat-paginator [length]="length"
+                [pageSize]="pageSize"
+                [pageSizeOptions]="pageSizeOptions"
+                (page)="pageEvent = $event"
+                aria-label="Select page">
+  </mat-paginator>
+</div>
+

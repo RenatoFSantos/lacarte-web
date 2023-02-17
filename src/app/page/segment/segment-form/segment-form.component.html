@@ -1,0 +1,27 @@
+<div>
+  <app-bread-crumb [items]="[{text: 'Cadastro de Segmentos Empresariais', link: '/segments' }, {text: pageTitle}]"></app-bread-crumb>
+</div>
+
+<div class="barra-titulo">
+  <h1 class="mat-display-1">{{pageTitle}}</h1>
+</div>
+
+
+<form class="container-form" [formGroup]="formResource">
+
+  <!-- Segment -->
+  <div class="fieldSegment item-flex">
+    <mat-form-field class="field-full-width" appearance="outline">
+      <mat-label>Segmento</mat-label>
+      <input matInput formControlName="segmNmSegment" required>
+      <mat-error><app-error-message [form-control]="formResource.get('segmNmSegment')"></app-error-message></mat-error>
+    </mat-form-field>
+  </div>
+  <div class="fieldToolbar">
+    <button mat-raised-button color="primary" [disabled]="!formResource.valid"  (click)="save()">Salvar</button>
+    <button id="btn-cancel" mat-raised-button routerLink="/segments">Cancelar</button>
+  </div>
+
+</form>
+
+

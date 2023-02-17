@@ -1,0 +1,30 @@
+@import '../../../../styles.scss';
+
+ul {
+  display: block;
+  list-style-type: none;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  padding-inline-start: 0px;
+}
+
+.breadcrumb {
+  margin: 5px 0px;
+}
+
+.breadcrumb-item {
+  margin-left: 0px;
+  font-size: 0.8rem;
+  a {
+    cursor: pointer;
+    text-decoration: none;
+    color: $link-breadcrumb;
+  }
+}
+
+li {
+  display: inline;
+  margin-right: 3px;
+}

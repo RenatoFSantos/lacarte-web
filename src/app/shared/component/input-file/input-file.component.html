@@ -1,0 +1,14 @@
+<div class="input-file" (click)="selectFile()">
+  <!-- <div *ngIf="localChange" class="preview" [style.background-image]="'url(&quot;' + fileCurrent.base64Data + '&quot;)'">
+  </div> -->
+  <div class="content">
+    <span *ngIf="!fileCurrent.name">{{label}}</span>
+    <span *ngIf="fileCurrent.name">
+      <strong>{{fileCurrent.name}}</strong><br>
+      <button mat-raised-button>
+        Alterar a imagem
+      </button>
+    </span>
+    <input #fileInput type="file" [(ngModel)]="file" (change)="handleFileSelect($event)"/>
+  </div>
+</div>

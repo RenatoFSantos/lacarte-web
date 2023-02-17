@@ -1,0 +1,167 @@
+<!-- ******** BREADCRUMB ********** -->
+<div>
+  <app-bread-crumb [items]="[{text: 'Cadastro de Empresas', link: '/companies'}, {text: 'Cadastro de Menu', link: '/companies/' + company.uid + '/menu'}, {text: pageTitle}]"></app-bread-crumb>
+</div>
+
+<div class="avatar-titulo barra-titulo">
+  <h1 class="mat-display-1">{{pageTitle}}</h1>
+</div>
+
+<!-- *** EDITION FORM *** -->
+<form #form="ngForm" *ngIf="formResource && !filterProduct" [formGroup]="formResource" class="container-form full-width">
+
+  <!-- ******** IMAGE ********** -->
+  <div class="fieldImage preview item-flex" [style.background-image]="'url(&quot;' + image + '&quot;)'">
+  </div>
+  <!-- ******** RATING ********** -->
+  <div class="fieldRating item-flex full-width">
+    <mat-form-field class="field-full-width" appearance="fill">
+      <mat-label>Classificação</mat-label>
+      <input class="field-number" matInput mask="separator.2" thousandSeparator="." formControlName="menuVlRating" readonly>
+    </mat-form-field>
+  </div>
+  <!-- ******** PRODUCT ********** -->
+  <div class="fieldProduct item-flex">
+    <mat-form-field appearance="outline">
+      <mat-label>Produto</mat-label>
+      <input matInput placeholder="digite um produto" formControlName="prodNmProduct" required readonly>
+      <button mat-icon-button matSuffix (click)="filterProducts()">
+        <mat-icon>search</mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
+  <!-- ******** PRODUCT ********** -->
+  <!-- <div class="fieldProduct item-flex">
+    <mat-form-field appearance="outline">
+      <mat-label>Produto</mat-label>
+      <input type="text"
+      placeholder="digite o nome do produto"
+      matInput
+      [formControl]="productControl"
+      [matAutocomplete]="auto" required>
+      <mat-icon matSuffix (click)="filterProducts()">search</mat-icon>
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let product of filteredOptions | async" [value]="product.prodNmProduct" (click)="selProduct(product)">
+          {{product.prodNmProduct}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  </div> -->
+  <!-- ******** ID PRODUCT ********** -->
+  <div class="fieldIdProduct item-flex">
+    <mat-form-field class="field-full-width" appearance="fill">
+      <mat-label>ID Produto</mat-label>
+      <input class="field-number" matInput formControlName="prodUid" readonly>
+    </mat-form-field>
+  </div>
+  <!-- ******** DESCRIPTION ********** -->
+  <div class="fieldDescription item-flex">
+    <mat-form-field class="field-full-width" appearance="fill">
+      <mat-label>Descrição</mat-label>
+      <input matInput readonly formControlName="prodDsProduct">
+    </mat-form-field>
+  </div>
+  <!-- ******** CATEGORY NAME ********** -->
+  <div class="fieldCategory item-flex">
+    <mat-form-field class="field-full-width" appearance="fill">
+      <mat-label>Categoria</mat-label>
+      <input matInput readonly formControlName="prodCategory">
+    </mat-form-field>
+  </div>
+  <!-- ******** SELECT IMAGE ********** -->
+  <div class="fieldSelectFile item-flex">
+    <app-input-file #appInput [image]="menu.menuTxImage || 'product_default.png'" (select)="selectedFile($event)"></app-input-file>
+  </div>
+  <!-- ******** ID ********** -->
+  <div class="fieldId item-flex">
+    <mat-form-field class="field-full-width" appearance="outline">
+      <mat-label>Código</mat-label>
+      <input matInput placeholder="digite o código no menu" formControlName="menuCdMenu" required>
+      <mat-error><app-error-message [form-control]="formResource.get('menuCdMenu')"></app-error-message></mat-error>
+    </mat-form-field>
+  </div>
+  <!-- ******** PRICE ********** -->
+  <div class="fieldPrice item-flex">
+    <mat-form-field class="field-full-width" appearance="outline">
+      <mat-label>R$</mat-label>
+      <input matInput mask="separator.2" thousandSeparator="." formControlName="menuVlPrice" required>
+      <mat-error><app-error-message [form-control]="formResource.get('menuVlPrice')"></app-error-message></mat-error>
+    </mat-form-field>
+  </div>
+  <!-- ******** DISCOUNT ********** -->
+  <div class="fieldDiscount item-flex">
+    <mat-form-field class="field-full-width" appearance="outline">
+      <mat-label>% Desconto</mat-label>
+      <input matInput mask="separator.2" thousandSeparator="." formControlName="menuPrDiscount">
+      <mat-error><app-error-message [form-control]="formResource.get('menuPrDiscount')"></app-error-message></mat-error>
+    </mat-form-field>
+  </div>
+  <!-- ******** DELIVERY VALUE ********** -->
+  <div class="fieldDelivery item-flex">
+    <mat-form-field class="field-full-width" appearance="outline">
+      <mat-label>% Delivery</mat-label>
+      <input matInput type="text" placeholder="digite o valor da taxa do delivery" mask="separator.2" thousandSeparator="." formControlName="menuPrDelivery">
+      <mat-error><app-error-message [form-control]="formResource.get('menuPrDelivery')"></app-error-message></mat-error>
+    </mat-form-field>
+  </div>
+  <!-- ******** CASHBACK ********** -->
+  <div class="fieldCashback item-flex">
+    <mat-form-field class="field-full-width" appearance="outline">
+      <mat-label>% Cashback</mat-label>
+      <input matInput mask="separator.2" thousandSeparator="." formControlName="menuPrCashback">
+      <mat-error><app-error-message [form-control]="formResource.get('menuPrCashback')"></app-error-message></mat-error>
+    </mat-form-field>
+  </div>
+  <!-- ******** DESCRIPTOR ********** -->
+  <div class="fieldDescriptor item-flex">
+    <mat-form-field class="field-full-width" appearance="outline">
+      <mat-label>Descritores</mat-label>
+      <input matInput placeholder="digite seus descritores separados por vírgula" maxlength="100" formControlName="menuDsDescriptor">
+    </mat-form-field>
+  </div>
+  <div class="fieldToolbar">
+    <button mat-raised-button type="submit" color="primary" [disabled]="formResource.invalid" (click)="onFormSubmit()">Salvar</button>
+    <button mat-raised-button routerLink="/companies/{{company.uid}}/menu">Cancelar</button>
+  </div>
+</form>
+
+<div [hidden]="!filterProduct" class="full-width">
+  <div class="toolbar_search">
+    <mat-form-field appearance="outline">
+      <mat-label>Pesquisar</mat-label>
+      <input #fieldSearch matInput placeholder="Pesquisar...">
+      <button mat-icon-button matSuffix>
+        <mat-icon>search</mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z1">
+    <!-- ********** CHECKED COLUMN ************ -->
+    <!-- <ng-container matColumnDef="checked">
+      <th mat-header-cell *matHeaderCellDef>SEL</th>
+      <td mat-cell *matCellDef="let element">
+        <mat-checkbox [(ngModel)]="element.checked"></mat-checkbox>
+      </td>
+    </ng-container> -->
+    <!-- ********** ID COLUMN ************ -->
+    <!-- <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef>ID</th>
+      <td mat-cell *matCellDef="let element"> {{element.uid}} </td>
+    </ng-container> -->
+
+    <!-- ********** PRODUCT COLUMN ************ -->
+    <ng-container matColumnDef="product">
+      <th mat-header-cell *matHeaderCellDef>PRODUTO</th>
+      <td mat-cell *matCellDef="let element"> {{element.prodNmProduct}} </td>
+    </ng-container>
+
+    <!-- ********** CATEGORY COLUMN ************ -->
+    <ng-container matColumnDef="category">
+      <th mat-header-cell *matHeaderCellDef>CATEGORIA</th>
+      <td mat-cell *matCellDef="let element"> {{element.category.cateNmCategory}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{highlighted: selection.isSelected(row)}" (click)="selectRow(row)"></tr>
+  </table>
+</div>

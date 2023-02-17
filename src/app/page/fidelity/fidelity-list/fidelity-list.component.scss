@@ -1,0 +1,74 @@
+@import 'src/assets/scss/theme';
+
+.table {
+  width: 100%;
+}
+
+th {
+  background-color: #B0BEC5;
+  font-size: medium;
+}
+
+#btn-edit {
+  background-color: $secondary-color;
+  margin-right: 5px;
+  color: white;
+}
+
+#btn-delete {
+  background-color: $tertiary-color;
+  margin-right: 5px;
+}
+
+#btn-menu {
+  background-color: $quaternary-color;
+  margin-right: 5px;
+}
+
+.user-table {
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+
+  & button {
+    margin-right: 0px;
+  }
+}
+
+.toolbar_search {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-content: center;
+  width: 100%;
+
+  & mat-form-field {
+    flex: 1 auto;
+    margin-right: 10px;
+    margin-bottom: -15px;
+  }
+
+  & button {
+    margin-top: 3px;
+    margin-bottom: 10px;
+  }
+}
+
+.mat-display-1 {
+  margin: 0 0 16px;
+}
+
+.mat-column-Segmento {
+  flex: 1 0 auto;
+}
+
+.mat-row.highlighted {
+  background: $secondary-color;
+}
+
+div > button {
+  margin-top: 10px;
+  text-align: end;
+}
+
+
