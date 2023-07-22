@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  apiPath: 'http://localhost:3000',
+  apiPath: 'https://lacarte-api.onrender.com',
   webPath: 'http://localhost:4200',
   linkImages: 'assets/image',
 };
